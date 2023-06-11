@@ -4,20 +4,21 @@ import { useForm } from 'react-hook-form'
 export const UsersForm = ({ isShowModal, createUser, isUserToUpdate, updateUser, resetModalFomr }) => {
 
     const { register, handleSubmit, reset } = useForm()
-    
+
     const submit = (data) => {
-        if(!data.birthday) data.birthday = null
+        if (!data.birthday) data.birthday = null
+        else if (!data.image_url) data.image_url = null
         if (isUserToUpdate) {
             updateUser(data, reset)
         } else {
-        createUser(data, reset);    
+            createUser(data, reset);
         }
     }
 
-    const handleCloseModal = () => { 
+    const handleCloseModal = () => {
         resetModalFomr(reset)
 
-    } 
+    }
 
     useEffect(() => {
         if (isUserToUpdate) {
@@ -33,7 +34,7 @@ export const UsersForm = ({ isShowModal, createUser, isUserToUpdate, updateUser,
                     <img className='h-20 w-20' src="/images/logoUsuario.png" alt="" />
                 </div>
 
-                
+
 
                 {/* //?nombre */}
                 <div className='flex flex-col gap-2 '>
@@ -76,7 +77,7 @@ export const UsersForm = ({ isShowModal, createUser, isUserToUpdate, updateUser,
                     <button className='font-medium text-[15px] bg-secondary hover:bg-primary hover:transition-all duration-300 ease-in text-black py-1 px-16 rounded-md shadow-2xl ' >{isUserToUpdate ? "Guardar cambios editados" : "Guardar usuario"}</button>
                     <button onClick={handleCloseModal} className='hover:text-black hover:bg-quinary hover:transition-all duration-300 ease-in py-1 hover:rounded-md shadow-2xl'>Cancelar</button>
                 </div>
-                
+
             </form>
         </section>
     )

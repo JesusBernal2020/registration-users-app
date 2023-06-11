@@ -21,19 +21,20 @@ function App() {
     email: '',
     password: '',
     birthday: '',
+    image_url: ''
   }
-///?----------------------------------------------------------------->
+  ///?----------------------------------------------------------------->
   const changShowModal = () => setIsShowModal(!isShowModal)
 
-  const getAllUsers = () => { 
+  const getAllUsers = () => {
     const url = `${BASE_URL}/users/`
 
     axios.get(url)
-      .then(({data}) => setUsers(data))
+      .then(({ data }) => setUsers(data))
       .catch((err) => console.log(err))
   }
 
-  const createUser = (data, reset) => { 
+  const createUser = (data, reset) => {
     const url = `${BASE_URL}/users/`
 
     axios.post(url, data)
@@ -53,23 +54,23 @@ function App() {
 
   }
 
-  const updateUser = (data, reset) => { 
+  const updateUser = (data, reset) => {
     const url = `${BASE_URL}/users/${isUserToUpdate.id}/`
 
     axios.patch(url, data)
       .then(() => {
         getAllUsers()
-        resetModalFomr(reset) 
+        resetModalFomr(reset)
       })
       .catch((err) => console.log(err))
   }
 
-  const resetModalFomr = (reset) => { 
+  const resetModalFomr = (reset) => {
     setIsShowModal(false)
     reset(DEFAULT_VALUES)
     setIsUserToUpdate(null)
-  } 
-    
+  }
+
   useEffect(() => {
     getAllUsers()
   }, [])
