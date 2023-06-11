@@ -7,7 +7,7 @@ export const UsersForm = ({ isShowModal, createUser, isUserToUpdate, updateUser,
 
     const submit = (data) => {
         if (!data.birthday) data.birthday = null
-        else if (!data.image_url) data.image_url = null
+        if (!data.image_url) data.image_url = null
         if (isUserToUpdate) {
             updateUser(data, reset)
         } else {
