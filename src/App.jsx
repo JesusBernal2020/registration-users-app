@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header'
@@ -6,6 +5,9 @@ import { UsersForm } from './components/UsersForm'
 import { set } from 'react-hook-form'
 import axios from 'axios'
 import UserList from './components/UserList'
+import ModalState from './components/ModalState'
+import swal from 'sweetalert'
+import './styles/swal.css'
 
 function App() {
   const [isUserToUpdate, setIsUserToUpdate] = useState(null)
@@ -21,7 +23,7 @@ function App() {
     email: '',
     password: '',
     birthday: '',
-    image_url: ''
+    image_url: '',
   }
   ///?----------------------------------------------------------------->
   const changShowModal = () => setIsShowModal(!isShowModal)
@@ -29,7 +31,8 @@ function App() {
   const getAllUsers = () => {
     const url = `${BASE_URL}/users/`
 
-    axios.get(url)
+    axios
+      .get(url)
       .then(({ data }) => setUsers(data))
       .catch((err) => console.log(err))
   }
@@ -37,32 +40,52 @@ function App() {
   const createUser = (data, reset) => {
     const url = `${BASE_URL}/users/`
 
-    axios.post(url, data)
+    axios
+      .post(url, data)
       .then(() => {
         getAllUsers()
         resetModalFomr(reset)
+        changShowModal()
+        showAlertSucces()
       })
-      .catch((err) => console.log(err))
+      .catch(() => {
+        showAlertError()
+      })
   }
 
   const deleteUser = (id) => {
     const url = `${BASE_URL}/users/${id}/`
 
-    axios.delete(url)
-      .then(() => getAllUsers())
-      .catch((err) => console.log(err))
+    // swal({
+    //   icon: 'warning',
+    //   text: '¿Estás seguro que deseas eliminar el usuario?',
+    //   buttons: ['No', 'Sí'],
+    // }) if(res){
 
+    // }
+    axios
+      .delete(url)
+
+      .then(() => {
+        getAllUsers()
+      })
+
+      .catch((err) => console.log(err))
   }
 
   const updateUser = (data, reset) => {
     const url = `${BASE_URL}/users/${isUserToUpdate.id}/`
 
-    axios.patch(url, data)
+    axios
+      .patch(url, data)
       .then(() => {
         getAllUsers()
         resetModalFomr(reset)
+        showEditUserSuccess()
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const resetModalFomr = (reset) => {
@@ -71,9 +94,35 @@ function App() {
     setIsUserToUpdate(null)
   }
 
+  const showAlertSucces = () => {
+    swal({
+      title: 'Usuario creado con éxito',
+      button: {
+        text: 'OK',
+        className: '',
+      },
+    })
+  }
+
+  const showAlertError = () => {
+    swal({
+      title: 'No se realizó la acción',
+      icon: 'error',
+      button: 'OK',
+    })
+  }
+
+  const showEditUserSuccess = () => {
+    swal({
+      title: 'Usuario editado con éxito',
+      button: 'OK',
+    })
+  }
+
   useEffect(() => {
     getAllUsers()
   }, [])
+
   return (
     <main className='bg-[url(/images/fondo.jpg)] min-h-screen bg-cover bg-center font-["Lato"] text-white'>
       <header>
@@ -85,10 +134,17 @@ function App() {
           isUserToUpdate={isUserToUpdate}
           updateUser={updateUser}
           resetModalFomr={resetModalFomr}
+          changShowModal={changShowModal}
         />
 
+        <UserList
+          users={users}
+          deleteUser={deleteUser}
+          changShowModal={changShowModal}
+          setIsUserToUpdate={setIsUserToUpdate}
+        />
 
-        <UserList users={users} deleteUser={deleteUser} changShowModal={changShowModal} setIsUserToUpdate={setIsUserToUpdate} />
+        {/* <ModalState /> */}
       </header>
     </main>
   )
