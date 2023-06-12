@@ -5,7 +5,6 @@ import { UsersForm } from './components/UsersForm'
 import { set } from 'react-hook-form'
 import axios from 'axios'
 import UserList from './components/UserList'
-import ModalState from './components/ModalState'
 import swal from 'sweetalert'
 import './styles/swal.css'
 
@@ -56,20 +55,27 @@ function App() {
   const deleteUser = (id) => {
     const url = `${BASE_URL}/users/${id}/`
 
-    // swal({
-    //   icon: 'warning',
-    //   text: '¿Estás seguro que deseas eliminar el usuario?',
-    //   buttons: ['No', 'Sí'],
-    // }) if(res){
-
-    // }
     axios
       .delete(url)
-
-      .then(() => {
-        getAllUsers()
+    swal({
+      title: '¿Estás seguro que deseas eliminar el usuario?',
+      buttons: ['No', 'Sí'],
+    })
+      .then((res) => {
+        if (res) { 
+          getAllUsers()
+          swal({
+            title: 'Usuario eliminado con éxito',
+            button: 'OK',
+          })
+        } else {
+          swal({
+            title: 'No se realizó la acción',
+            button: 'OK',
+          })
+        }
       })
-
+      
       .catch((err) => console.log(err))
   }
 
@@ -107,7 +113,6 @@ function App() {
   const showAlertError = () => {
     swal({
       title: 'No se realizó la acción',
-      icon: 'error',
       button: 'OK',
     })
   }
@@ -118,6 +123,7 @@ function App() {
       button: 'OK',
     })
   }
+
 
   useEffect(() => {
     getAllUsers()

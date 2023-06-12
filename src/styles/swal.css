@@ -1,10 +1,18 @@
 .swal-modal {
   background-color: rgb(181, 167, 167);
+  width: 290px;
+  height: 220px;
+  padding: 0;
+  margin: 0;
 }
 
-.swal-title {
+
+.swal-title { 
+  padding-top: 22px;
+  padding-bottom: 2rem;
+  margin: 0;
+  font-size: 1.2rem;
   display: block;
-  margin: 22px;
   text-align: center;
   color: #ffffff;
 }
@@ -18,9 +26,15 @@
 
 .swal-button {
   color: black;
-  padding: 7px 19px;
+  padding: 7px 30px;
   border-radius: 2px;
   background-color: #8eff8b;
   font-size: 12px;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.swal-footer {
+  text-align: center;
+  padding: 0;
+  margin:0;
 }

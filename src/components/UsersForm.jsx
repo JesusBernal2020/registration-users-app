@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import swal from 'sweetalert'
 
 export const UsersForm = ({
   isShowModal,
@@ -42,9 +41,9 @@ export const UsersForm = ({
         className="bg-tertiary w-[290px] p-5 flex flex-col gap-4 rounded-2xl px-10 min-[350px]:w-[330px] min-[400px]:w-[380px] min-[400px]:px-14 min-[700px]:w-[450px] min-[700px]:px-16 min-[1000px]:w-[550px] min-[1000px]:px-24"
       >
         {/* <h3 className='font-bold text-2xl'> nuevo usuario</h3> */}
-        <div className=" flex justify-center ">
+        {/* <div className=" flex justify-center ">
           <img className="h-20 w-20" src="/images/logoUsuario.png" alt="" />
-        </div>
+        </div> */}
 
         {/* //?nombre */}
         <div className="flex flex-col gap-2 ">
