@@ -12,13 +12,13 @@ const User = ({ user, deleteUser, changShowModal, setIsUserToUpdate }) => {
   }
 
   return (
-    <article className="bg-quaternary flex flex-wrap gap-3 w-[220px] justify-between rounded-xl p-4 sm:w-[550px] sm:p-5 lg:w-[560px]">
+    <article className="bg-quaternary flex flex-wrap gap-3 w-[220px] justify-between rounded-xl p-4 sm:w-[570px] sm:p-4 lg:w-[560px]">
       <div className="mx-auto sm:my-auto">
         <img
           className="h-20"
           src={
             user.image_url ||
-            'https://assets.stickpng.com/images/585e4beacb11b227491c3399.png'
+            'https://www.svgrepo.com/show/192244/man-user.svg'
           }
           alt="usuario"
         />
