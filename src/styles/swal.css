@@ -1,9 +1,10 @@
 .swal-modal {
-  background-color: rgb(181, 167, 167);
+  background-color: rgb(125, 124, 124);
   width: 290px;
-  height: 220px;
+  height: 290px;
   padding: 0;
   margin: 0;
+  border-radius: 20px;
 }
 
 
@@ -24,13 +25,43 @@
   color: #ffffff;
 }
 
-.swal-button {
+.swal-button--confirm {
   color: black;
-  padding: 7px 30px;
-  border-radius: 2px;
+  padding: 8px 30px;
+  border-radius: 8px;
   background-color: #8eff8b;
-  font-size: 12px;
+  font-size: 14px;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+
+.swal-button--cancel {
+  color: black;
+  padding: 8px 30px;
+  border-radius: 8px;
+  background-color: #ff8b8b;
+  font-size: 14px;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.swal-icon.swal-icon--success::before{
+  background-color: rgb(125, 124, 124);
+  border-color: rgb(125, 124, 124);
+  border-radius: 50%;
+  border-width: 4px;
+  border-style: solid;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: block;
+
+}
+.swal-icon.swal-icon--success::after{
+  background-color: rgb(125, 124, 124);
+}
+.swal-icon--success__hide-corners {
+  display: none;
 }
 
 .swal-footer {

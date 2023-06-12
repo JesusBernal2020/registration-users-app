@@ -58,6 +58,7 @@ function App() {
     axios
       .delete(url)
     swal({
+      icon: 'warning',
       title: '¿Estás seguro que deseas eliminar el usuario?',
       buttons: ['No', 'Sí'],
     })
@@ -65,11 +66,13 @@ function App() {
         if (res) { 
           getAllUsers()
           swal({
+            icon: 'success',
             title: 'Usuario eliminado con éxito',
             button: 'OK',
           })
         } else {
           swal({
+            icon: 'warning',
             title: 'No se realizó la acción',
             button: 'OK',
           })
@@ -102,16 +105,18 @@ function App() {
 
   const showAlertSucces = () => {
     swal({
+      icon: 'success',
       title: 'Usuario creado con éxito',
       button: {
         text: 'OK',
-        className: '',
+
       },
     })
   }
 
   const showAlertError = () => {
     swal({
+      icon: 'error',
       title: 'No se realizó la acción',
       button: 'OK',
     })
@@ -119,6 +124,7 @@ function App() {
 
   const showEditUserSuccess = () => {
     swal({
+      icon: 'success',
       title: 'Usuario editado con éxito',
       button: 'OK',
     })
