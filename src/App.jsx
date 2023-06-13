@@ -55,21 +55,24 @@ function App() {
   const deleteUser = (id) => {
     const url = `${BASE_URL}/users/${id}/`
 
-    axios
-      .delete(url)
     swal({
       icon: 'warning',
       title: '¿Estás seguro que deseas eliminar el usuario?',
       buttons: ['No', 'Sí'],
     })
       .then((res) => {
-        if (res) { 
+        if (res) {
           getAllUsers()
-          swal({
-            icon: 'success',
-            title: 'Usuario eliminado con éxito',
-            button: 'OK',
-          })
+          axios
+            .delete(url)
+            .then(() => {
+              swal({
+                icon: 'success',
+                title: 'Usuario eliminado con éxito',
+                button: 'OK',
+              })
+            })
+            .catch((err) => console.log(err))
         } else {
           swal({
             icon: 'warning',
@@ -78,7 +81,7 @@ function App() {
           })
         }
       })
-      
+
       .catch((err) => console.log(err))
   }
 
@@ -109,7 +112,6 @@ function App() {
       title: 'Usuario creado con éxito',
       button: {
         text: 'OK',
-
       },
     })
   }
@@ -129,7 +131,6 @@ function App() {
       button: 'OK',
     })
   }
-
 
   useEffect(() => {
     getAllUsers()
