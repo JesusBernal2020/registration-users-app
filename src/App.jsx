@@ -66,6 +66,7 @@ function App() {
           axios
             .delete(url)
             .then(() => {
+              getAllUsers()
               swal({
                 icon: 'success',
                 title: 'Usuario eliminado con éxito',
